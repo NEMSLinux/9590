@@ -1,6 +1,7 @@
 #!/bin/bash
 # Just a dummy port listener by Robbie Ferguson
 # See https://docs.nemslinux.com/en/latest/basic/9590.html
+# Depends on the OpenBSD version of NetCat
 
 set -e
 
@@ -10,10 +11,10 @@ if [[ -f /run/9590.pid ]]; then
 fi
 
 case "${1:-}" in
-  stop|reload|restart|force-reload)
+  stop)
         echo "Stopping 9590."
         kill $pid
-	rm /run/9590.pid ;;
+        rm /run/9590.pid ;;
 
   start)
      if [[ -f /run/9590.pid ]]; then
@@ -24,11 +25,12 @@ case "${1:-}" in
          rm /run/9590.pid
        fi
      fi
-        echo "Starting 9590."
-        /bin/nc -l -p 9590 & echo $! > /run/9590.pid ;;
+     echo "Starting 9590."
+     /bin/nc -dkl 9590 & echo $! > /run/9590.pid ;;
 
   *)
-        echo "Usage: ${0:-} {start|stop|status|restart|reload|force-reload}" >&2
+        echo "Usage: ${0:-} {start|stop}" >&2
         exit 1
         ;;
 esac
+

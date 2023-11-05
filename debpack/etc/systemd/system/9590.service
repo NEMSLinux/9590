@@ -1,0 +1,10 @@
+[Unit]
+Description=A null task to listen on port 9590 (for Nagios testing)
+
+[Service]
+PIDFile=/run/9590.pid
+ExecStart=/usr/local/bin/9590 start
+Restart=no
+
+[Install]
+WantedBy=multi-user.target
