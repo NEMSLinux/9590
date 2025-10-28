@@ -4,7 +4,7 @@ Priority: important
 Section: main
 Maintainer: NEMS Linux <nems@category5.tv>
 Architecture: all
-Version: 1.4
+Version: 1.41
 Provides: 9590
 Description: Demo port listener daemon for Getting Started Guide exercise
 Depends: netcat-openbsd
